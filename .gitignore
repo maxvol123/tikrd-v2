@@ -27,3 +27,7 @@ Thumbs.db
 
 # Docker volumes
 postgres-data/
+
+# Cache
+tsconfig.build.tsbuildinfo
+*.tsbuildinfo
