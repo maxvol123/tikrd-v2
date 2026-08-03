@@ -6,10 +6,10 @@ export class UsersService {
     constructor(
         private prisma: PrismaService,
     ) { }
-    async create(email: string, passwordHash: string) {
+    async create(email: string, passwordHash: string, username: string) {
         return this.prisma.user.create({
             data: {
-                email, passwordHash
+                username, email, passwordHash
             }
         })
     }
