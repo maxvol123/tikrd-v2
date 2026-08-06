@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTradeDto } from './dto/trades.dto';
 import { PrismaService } from '../prisma.service';
 
@@ -13,7 +13,23 @@ export class TradesService {
             }
         })
     }
-    async getAll(userId: string){
-        return this.prisma.trade.findMany({where: {userId}})
+    async getAll(userId: string) {
+        const trades = this.prisma.trade.findMany({ where: { userId } })
+        if (!trades) {
+            throw new NotFoundException("Trades not found")
+        }
+        return trades
+    }
+    async findById(userId: string, tradeId: string) {
+        const trade = await this.prisma.trade.findFirst({
+            where: {
+                userId: userId,
+                id: tradeId
+            }
+        })
+        if (!trade) {
+            throw new NotFoundException("Trade not found")
+        }
+        return trade
     }
 }

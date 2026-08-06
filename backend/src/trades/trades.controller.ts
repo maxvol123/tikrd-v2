@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { TradesService } from './trades.service';
 import { CreateTradeDto } from './dto/trades.dto';
@@ -16,6 +16,10 @@ export class TradesController {
     @Get("")
     getAll(@CurrentUser() user: SafeUser){
         return this.TradesService.getAll(user.id)
+    }
+    @Get("/trade")
+    findById(@CurrentUser() user: SafeUser, @Param("tradeId") tradeId: string){
+        return this.TradesService.findById(user.id, tradeId)
     }
 
 }
