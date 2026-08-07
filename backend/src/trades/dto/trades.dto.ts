@@ -1,5 +1,6 @@
 import { IsOptional, IsNumber, IsString, IsEnum, IsDateString } from 'class-validator';
 import { TradeSide } from '../../generated/prisma/enums';
+import { PartialType } from '@nestjs/mapped-types';
 
 
 export class CreateTradeDto {
@@ -38,3 +39,4 @@ export class CreateTradeDto {
     @IsString()
     notes?: string;
 }
+export class UpdateTradeDto extends PartialType(CreateTradeDto) {}
