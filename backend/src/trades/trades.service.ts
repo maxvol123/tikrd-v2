@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTradeDto, UpdateTradeDto } from './dto/trades.dto';
 import { PrismaService } from '../prisma.service';
+import { TradeStatistics  } from './types';
 
 @Injectable()
 export class TradesService {
@@ -58,5 +59,11 @@ export class TradesService {
             where: {id: tradeId},
             data: dto
         })
+    }
+    async getStatistic(userId: string){
+        const trades = await this.getAll(userId)
+        let statistic: TradeStatistics
+
+        
     }
 }
