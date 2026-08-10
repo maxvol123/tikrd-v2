@@ -29,4 +29,8 @@ export class TradesController {
     update(@CurrentUser() user: SafeUser, @Param("tradeId") tradeId: string, @Body() dto:UpdateTradeDto) {
         return this.TradesService.update(user.id, tradeId, dto)
     }
+    @Get('/statistic')
+    getStatistic(@CurrentUser() user: SafeUser){
+        return this.TradesService.getStatistic(user.id,)
+    }
 }
